@@ -1,0 +1,73 @@
+(defwidget menu []
+  (centerbox :orientation "v" :class "background" :space-evenly true :valign "center"
+    (logout)
+    (lock)
+    (power)))
+
+(defwidget menu2 []
+  (centerbox :orientation "v" :class "background" :space-evenly true :valign "center"
+    (logout)
+    (lock)
+    (power2)))
+
+(defwidget logout []
+ (box :class "buttonbackground" :height 50
+    (button :label "Logout " :onclick "hyprctl dispatch exit hello" "Logout ")
+)
+)
+
+(defwidget lock []
+  (box :class "buttonbackground" :height 50
+    (button :label "Lock " :onclick "eww -c $PWD close-all && hyprland-lock" "Lock ")
+)
+)
+
+(defwidget power []
+  (box :class "buttonbackground" :height 50
+    (button :label "Power ⏻" :onclick "scripts/menu 1" "Power ⏻")
+  )
+)
+
+(defwidget power2 []
+  (box :class "buttonbackground" :height 50
+    (button :label "Power ⏻" :onclick "scripts/menu 2" "Power ⏻")
+  )
+)
+
+(defwidget power-menu []
+  (box :class "power-menu-parent" :orientation "h" :space-evenly true
+    (box :class "power-menu-child" :orientation "v" :space-evenly true
+      (button :onclick "loginctl poweroff -i" "Shutdown 🖥️")
+      (button :onclick "loginctl reboot -i" "Restart 🔃")
+      )
+    (box :class "power-menu-child" :orientation "v" :space-evenly true
+      (button :onclick "eww -c $PWD close-all && loginctl suspend" "Sleep 💤")
+      (button :onclick "eww -c $PWD close-all && loginctl hibernate" "Hibernate 🐻")
+      )
+    )
+  )
+
+(defwindow menu
+  :monitor 1
+  :geometry (geometry :x "1790px" :y "5px" :width 120 :height 0)
+  (menu)
+  )
+
+(defwindow power-menu
+  :monitor 1
+  :geometry (geometry :x "685px" :y "340px" :width 550 :height 225)
+  (power-menu)
+  )
+
+(defwindow menu2
+  :monitor 0
+  :geometry (geometry :x "1790px" :y "5px" :width 120 :height 0)
+  (menu2)
+  )
+
+(defwindow power-menu2
+  :monitor 0
+  :geometry (geometry :x "685px" :y "340px" :width 550 :height 225)
+  (power-menu)
+  )
+

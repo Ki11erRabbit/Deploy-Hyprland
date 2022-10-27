@@ -1,0 +1,39 @@
+
+(defwidget volume-slider []
+  (box :orientation "h" :class "slider-box" :orientation "h" :halign "center"
+    (metric :label "🔊"
+            :value volume
+            :onchange "pamixer --set-volume {}")
+    ))
+
+(defpoll volume :interval "1ms"
+  "scripts/getvol")
+
+(defwindow volume-popup :class "popup"
+  :monitor 1
+  :geometry (geometry :x "90%"
+                      :y "5px"
+                      :height "40px"
+                      :width "120px")
+  (volume-slider))
+
+(defwindow volume-popup2 :class "popup"
+  :monitor 0
+  :geometry (geometry :x "90%"
+                      :y "5px"
+                      :height "40px"
+                      :width "120px")
+  (volume-slider))
+
+(defwidget metric [label value onchange]
+  (box :orientation "h"
+       :class "metric"
+       :space-evenly false
+    (box :class "label" label)
+    (scale :min 0
+           :max 101
+           :active {onchange != ""}
+           :value value
+           :onchange onchange)))
+
+

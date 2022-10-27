@@ -1,0 +1,36 @@
+#!/bin/bash
+
+## Files and cmd
+FILE="$HOME/.cache/eww_menu.power"
+CFG="$HOME/.config/eww/power-menu/"
+EWW=`which eww`
+
+## Run eww daemon if not running already
+if [[ ! `pidof eww` ]]; then
+	${EWW} daemon
+	sleep 1
+fi
+
+## Open widgets 
+run_eww() {
+	${EWW} --config "$CFG" open \
+                power-menu
+}
+run_eww_alt(){
+	${EWW} --config "$CFG" open \
+                power-menu2
+}
+
+## Launch or close widgets accordingly
+if [[ ! -f "$FILE" ]]; then
+	touch "$FILE"
+    case $1 in
+        1)run_eww;;
+        2)run_eww_alt;;
+    esac
+else
+	${EWW} --config "$CFG" close \
+                    power-menu power-menu2
+	rm "$FILE"
+fi
+

@@ -1,0 +1,41 @@
+#!/bin/bash
+
+
+## Files and cmd
+FILE="$HOME/.cache/eww.volumepopup"
+CFG="$HOME/.config/eww/misc-widgets"
+EWW=`which eww`
+
+## Run eww daemon if not running already
+if [[ ! `pidof eww` ]]; then
+	${EWW} daemon
+	sleep 1
+fi
+
+
+
+## Open widgets 
+run_eww() {
+	${EWW} --config "$CFG" open-many \
+		   volume-popup 
+}
+
+run_eww_alt() {
+	${EWW} --config "$CFG" open-many \
+		   volume-popup2 
+}
+
+## Launch or close widgets accordingly
+if [[ ! -f "$FILE" ]]; then
+	touch "$FILE"
+    case $(hyprctl activewindow | awk '$1 ~ /^monitor/' | awk '{ print $2 }') in
+        0) run_eww_alt;;
+        1) run_eww;;
+    esac
+    volume-popup2 &
+    #${EWW} --config "$CFG" close volume-popup
+
+else
+    killall volume-popup2
+	volume-popup2 &
+fi

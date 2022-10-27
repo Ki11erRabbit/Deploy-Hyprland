@@ -1,0 +1,7 @@
+#!/bin/bash
+
+FILE="$HOME/.cache/eww.volumepopup"
+CFG="$HOME/.config/eww/misc-widgets"
+EWW=`which eww`
+
+sleep 1s && rm "$FILE" && ${EWW} --config "$CFG" close-all

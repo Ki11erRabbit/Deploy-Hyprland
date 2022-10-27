@@ -1,0 +1,57 @@
+#!/bin/sh
+
+find ~/Pictures/Wallpapers/dwm -type f \( -name '*.jpg' -o -name '*.png' \) -print0 | shuf -z | shuf -n1 -z | xargs -0 feh --bg-fill
+
+
+path=$(cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g')
+# blacklist to prevent certain wallpapers from becoming lockscreen
+case $path in
+   *74922321_p0.jpg*) hyprland-lock & exit 1 ;;
+   *78657213_p1.jpg*) hyprland-lock & exit 1;;
+   *78657213_p3.jpg*) hyprland-lock & exit 1;;
+   *EsPY9uMVcAEt1fC*) hyprland-lock & exit 1;;
+   *54237099_p0*) hyprland-lock & exit 1;;
+   *EDqrlY9U4AEW_os.jpeg*) hyprland-lock & exit 1;;
+   *f51040b.jpg*) hyprland-lock & exit 1;;
+   *RDT_20211015_00355792008528116845930.jpg*) hyprland-lock & exit 1;;
+   *RDT_20211015_00355792008528116845930.jpg*) hyprland-lock & exit 1;;
+   *69555472_p27.png*) hyprland-lock & exit 1;;
+   *69555472_p29.png*) hyprland-lock & exit 1;;
+   *f51040b.jpg*) hyprland-lock & exit 1;;
+   *FEUFVSOUYAM2yGL-upscale.jpeg*) hyprland-lock & exit 1;;
+   *11xnx_output.png*) hyprland-lock & exit 1;;
+   *Altera_output.png*) hyprland-lock & exit 1;;
+   *Illya_Beach_Swimwear_2_output.png*) hyprland-lock & exit 1;;
+   *C359ViTUkAAyyTo_output.jpg*) hyprland-lock & exit 1;;
+   *0017\ \(1\).png*) hyprland-lock & exit 1;;
+   *0017\ \(2\).png*) hyprland-lock & exit 1;;
+   *0032.png*) hyprland-lock & exit 1;;
+   *0024\ \(1\).png*) hyprland-lock & exit 1;;
+   *0043.png*) hyprland-lock & exit 1;;
+   *Game\ 2/EV001*) hyprland-lock & exit 1;;
+   *Game\ 3/MGD_000035*) hyprland-lock & exit 1;;
+   *Game\ 3/MGD_000061*) hyprland-lock & exit 1;;
+   *Game\ 4/MGD_000031*) hyprland-lock & exit 1;;
+   *Game\ 5/MGD_000040*) hyprland-lock & exit 1;;
+   *Game\ 5/MGD_000041*) hyprland-lock & exit 1;;
+   *Game\ 5/MGD_000042*) hyprland-lock & exit 1;;
+   *Game\ 6/EV004*) hyprland-lock & exit 1;;
+   *Game\ 7/EV10*) hyprland-lock & exit 1;;
+   *Game\ 7/EV13*) hyprland-lock & exit 1;;
+   *Game\ 8/CU03*) hyprland-lock & exit 1;;
+   *Game\ 10/MGD_000054*) hyprland-lock & exit 1;;
+   *Game\ 10/MGD_000069*) hyprland-lock & exit 1;;
+   *Game\ 10/MGD_000073*) hyprland-lock & exit 1;;
+   *Game\ 10/MGD_000074*) hyprland-lock & exit 1;;
+   *Game\ 10/MGD_000075*) hyprland-lock & exit 1;;
+   *Game\ 4/MGD_000023*) hyprland-lock & exit 1;;
+   *Game\ 4/MGD_000060*) hyprland-lock & exit 1;;
+   *Game\ 9/CU02*) hyprland-lock & exit 1;;
+   *Game\ 9/CU03*) hyprland-lock & exit 1;;
+*59087263_p0.png*) hyprland-lock & exit 1;;
+*101228924_p0.jpg*) hyprland-lock & exit 1;;
+*da4da817658c636633415e8051542e32.jpg*) hyprland-lock & exit 1;;
+*d4a633cbc2127aac34136bdd59f0ff3af4b848eb.png*) hyprland-lock & exit 1;;
+esac
+
+cat ~/.fehbg | awk 'FNR==2 {print}' | sed 's/feh --no-fehbg --bg-fill//g' | xargs swaylock -f -i

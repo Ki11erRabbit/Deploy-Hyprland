@@ -1,0 +1,29 @@
+#!/bin/sh
+
+
+FILE="$HOME/.cache/eww_display.menu"
+CFG="$HOME/.config/eww/power-menu"
+EWW=`which eww`
+
+run_eww() {
+    ${EWW} --config "$CFG" open \
+        menu
+}
+
+run_eww_alt() {
+    ${EWW} --config "$CFG" open \
+        menu2
+}
+
+
+if [[ ! -f "$FILE" ]]; then
+    touch "$FILE"
+    case $1 in
+        1) run_eww;;
+        2) run_eww_alt;;
+    esac
+else
+    ${EWW} --config "$CFG" close \
+        menu power-menu menu2 power-menu2
+    rm "$FILE"
+fi
